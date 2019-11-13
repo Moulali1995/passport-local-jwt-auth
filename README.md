@@ -1,4 +1,4 @@
-# Passport-local-Auth
+# Passport-Local-JWT-Auth
 This local Stratergy involves usage of user credentials which are then validated with the credentials in the DB and generate a jwt token for authroization purposes.
 
 Getting set up :+1:
