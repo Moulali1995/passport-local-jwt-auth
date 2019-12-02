@@ -15,6 +15,8 @@ class App extends React.Component {
       token:''
     }
     this.logout = this.logout.bind(this)
+    this.user = this.user.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     
   }
   /*
@@ -43,11 +45,13 @@ class App extends React.Component {
     axios.post('/login',body)
     .then((response)=>{
       console.log(response)
+      if(response.status!==401){
       axios.defaults.headers.common['x-auth-token'] = response.headers['x-auth-token']
       this.setState({is_loggedin:true, name:response.data.name})
+      }
     })
     .catch(err=>{
-      this.setState({resdata: '', errormessage:err})
+      this.setState({resdata: '', errormessage:"Unauthorized"})
     })
   }
   user () {
@@ -56,8 +60,8 @@ class App extends React.Component {
     axios
       .get('/user')
       .then(res => {
-        const payload=res.data.payload
-          this.setState({ resdata:JSON.stringify(res)})
+        let payload=res.data.payload;
+          this.setState({ resdata:JSON.stringify(payload)})
       })
       .catch(err => {
         
@@ -69,7 +73,7 @@ class App extends React.Component {
     // This will logout user from the current session and delete the session.
    
     axios
-      .get('/logout')
+      .get('/logout') 
       .then(res => {
         if (res.status === 200) {
           this.setState({ is_loggedin: false, resdata: '', errormessage: '' })

@@ -6,9 +6,9 @@ var jwt = require('jsonwebtoken')
 var private_key = 'ssshhh'
 var User = {
   id: 7,
-  name: 'james bond',
-  username: 'bond',
-  password: '007'
+  name: 'Admin',
+  username: 'admin',
+  password: 'admin'
 }
 passport.use(new LocalStrategy(( username, password, done) => {
     if (User.username === username && User.password === password) {
@@ -54,7 +54,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/fail' 
 )
 
 router.get('/fail', (req, res) => {
-  res.send('invalid credentials')
+  res.status(401).send('invalid credentials')
 })
 
 router.get('/user',isLoggedIn,(req,res)=>{
