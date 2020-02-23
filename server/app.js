@@ -22,13 +22,15 @@ app.use(cookieParser());
 // making the public folder accessible to access the static items.
 app.use(express.static(path.join(__dirname, 'public')));
 // use express session  to maintain the authentication status
-/* app.use(require('express-session')(
-  { secret: 'keyboard cat',
-   resave: false,
-   saveUninitialized: false,
-   cookie: { expires: 60000 }
-   }))
-*/
+app.use(require('express-session')(
+    {
+      name: '_session',
+      secret: 'keyboard cat',
+      resave: false,
+      saveUninitialized: false,
+      cookie: {expires: 1000*60*2},
+    }));
+
 // passport intialize middleware
 app.use(passport.initialize());
 app.use(passport.session());

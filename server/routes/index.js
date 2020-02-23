@@ -62,7 +62,6 @@ router.get('/user',isLoggedIn,(req,res)=>{
 })
 
 router.get('/logout',isLoggedIn,(req,res)=>{
-  res.send("Logout not possible using jwt please use sessions")
-
-})
-module.exports = router
+  res.send('ok').sendStatus(200);
+  })
+module.exports = router 
